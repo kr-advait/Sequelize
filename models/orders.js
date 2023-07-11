@@ -25,7 +25,7 @@ const Orders = sequelize.define("orders", {
     indexes : [
         {
             unique : true,
-            fields : ["product", "customerId"]
+            fields : ["productName", "customerId"]
         }
     ]
 })

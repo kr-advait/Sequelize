@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(router)
 
 sequelize
-    .sync({alter : true})
+    .sync({force : true})
     .then((result) => {
         log("Database Table created...!!")
     })
