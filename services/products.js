@@ -21,7 +21,7 @@ class products {
     static async addProducts(name, quantity, price) {
         // const { name, quantity, price } = req.body
         try {
-            return await Products.create({
+            return await Products.upsert({
                 name: name,
                 total_quantity: quantity,
                 quantity_left: quantity,
