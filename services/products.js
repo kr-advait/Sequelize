@@ -1,7 +1,5 @@
 const { Products } = require("../models");
 
-// const products = {};
-
 class products {
 
 
@@ -10,7 +8,7 @@ class products {
     }
 
     static async getProductByName(name) {
-        // const name = req.params.name
+        
         return await Products.findOne({
             where: {
                 name: name
@@ -19,7 +17,7 @@ class products {
     }
 
     static async addProducts(name, quantity, price) {
-        // const { name, quantity, price } = req.body
+        
         try {
             return await Products.upsert({
                 name: name,
@@ -33,7 +31,7 @@ class products {
     }
 
     static async updateProductName(name, newName) {
-        // const { name, newName } = req.body;
+        
         return !![await Products.update({ name: newName }, {
             where: {
                 name: name
@@ -41,7 +39,7 @@ class products {
         })]
     }
 
-    async getProductTotalQuantity(name) {
+   static async getProductTotalQuantity(name) {
         const response = await Products.findOne({
             attributes: ['total_quantity']
         },
@@ -55,8 +53,7 @@ class products {
 
     static async updateProductLeftQuantityByName(name, quantity) {
 
-        // const { name, quantity } = req.body
-        const total_quantity = await getProductTotalQuantity(name)
+        const total_quantity = await this.getProductTotalQuantity(name)
 
         if (quantity > total_quantity) {
             throw new Error("Quantity must be less than Total Quantity")
@@ -78,8 +75,6 @@ class products {
 
     static async updateProductTotalQuantityByName(name, quantity) {
 
-        // const { name, quantity } = req.body
-
         if (!name) {
             throw new Error("Name can't be empty")
         }
@@ -96,7 +91,7 @@ class products {
     }
 
     static async deleteProductByName(name) {
-        // const { name } = req.body;
+
         return !![await Products.destroy({
             where: {
                 name: name

@@ -1,7 +1,5 @@
 const Orders = require("../services/orders");
 
-// const Orders = new orders()
-
 class OrderController {
 
     static async getAllOrders(req, res) {

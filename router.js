@@ -3,10 +3,6 @@ const customerController = require("./controllers/customers");
 const productController = require("./controllers/products");
 const orderController = require("./controllers/orders");
 
-// const customerController = new CustomerController();
-// const productController = new ProductController();
-// const orderController = new OrderController();
-
 const router = express.Router();
 
 // Customers

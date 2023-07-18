@@ -1,7 +1,5 @@
 const { Customers } = require("../models");
 
-// const customers = {};
-
 class customers {
     static async getAllCustomers() {
         const response = await Customers.findAll()
@@ -9,12 +7,12 @@ class customers {
     }
 
     static async getCustomerById(id) {
-        // const id = req.params.id
+        
         return await Customers.findByPk(id)
     }
 
     static async addCustomer(name, email) {
-        // const { name, email } = req.body
+        
         try {
             return await Customers.findOrCreate({
                 where : {
@@ -28,8 +26,6 @@ class customers {
     }
 
     static async updateCustomerById(id, name, email) {
-
-        // const {id, name, email} = req.body
 
         if (!name) {
             throw new Error("Name can't be empty")
@@ -49,7 +45,6 @@ class customers {
     }
 
     static async deleteCustomerById(id) {
-        // const { id } = req.body;
         return {
             success: !![await Customers.destroy({
                 where: {

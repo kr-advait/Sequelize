@@ -1,8 +1,7 @@
 const { Customers, Products, Orders } = require("../models");
 const sequelize = require("../dbConnect");
-const { QueryTypes, Op, or } = require("sequelize");
+const { QueryTypes, Op } = require("sequelize");
 
-// const orders = {}
 class orders {
 
 
@@ -11,7 +10,7 @@ class orders {
     }
 
     static async getOrderById(id) {
-        // const id = req.params.id;
+
         const query = `SELECT * FROM orders WHERE id = ?`;
         const response = await sequelize.query(query, {
             replacements: [id],
@@ -21,7 +20,6 @@ class orders {
     }
 
     static async placeOrder(product, quantity, status, customerId, productId) {
-        // const { product, quantity, status, customerId, productId } = req.body;
 
         return await Orders.create({
             productName: product,
@@ -48,29 +46,29 @@ class orders {
 
             const query = `
             SELECT 
-            orders.id as orderId,
-            orders.productId,
-            orders.customerId,
-            customers.name,
-            orders.productName,
-            orders.quantity,
-            products.price,
-            orders.status,
-            customers.email,
-            orders.createdAt,
-            orders.updatedAt
+                orders.id as orderId,
+                orders.productId,
+                orders.customerId,
+                customers.name,
+                orders.productName,
+                orders.quantity,
+                products.price,
+                orders.status,
+                customers.email,
+                orders.createdAt,
+                orders.updatedAt
             FROM
-            orders
+                orders
             RIGHT OUTER JOIN
-            products
+                products
             ON
-            orders.productId = products.id
+                orders.productId = products.id
             LEFT OUTER JOIN
-            customers
+                customers
             ON
-            customers.id = orders.customerId
-        WHERE
-            orders.id = ?
+                customers.id = orders.customerId
+            WHERE
+                orders.id = ?
         `
 
             const result = await sequelize.query(query, {
@@ -87,8 +85,8 @@ class orders {
     static async getOrderDetailsById(orderId) {
         const result = await Orders.findAll({
             include: [
-                { model : Products },
-                { model : Customers }
+                { model: Products },
+                { model: Customers }
             ],
             where: {
                 id: orderId

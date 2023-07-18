@@ -1,8 +1,5 @@
 const Customers = require("../services/customers");
 
-// const Customers = new customers()
-
-// const customerController = {};
 class CustomerController {
 
     static async getAllCustomers(req, res) {
